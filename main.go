@@ -20,7 +20,7 @@ func GetMediaInfo(res string, fileName string) {
 		width = "480"
 		height = "360"
 	} else if res == "480" {
-		width = "858"
+		width = "854"
 		height = "480"
 	} else if res == "720" {
 		width = "1280"
@@ -47,6 +47,7 @@ func GetMediaInfo(res string, fileName string) {
 	}
 	defer errfile.Close()
 	cmd.Stdout = outfile
+	cmd.Stderr = errfile
 	// cmd.Stdout = &stdout
 	// cmd.Stderr = &stderr
 	err = cmd.Run()
@@ -63,5 +64,11 @@ func GetMediaInfo(res string, fileName string) {
 
 func main() {
 	// fmt.Println("Hello Wsl")
-	GetMediaInfo("480", "sample.mkv")
+	//GetMediaInfo("480", "sample.mkv")
+	MakeDir("sample")
+	// Transcode("sample.mp4", "640", "360")
+	// Transcode("sample.mp4", "854", "480")
+	// Transcode("sample.mp4", "1280", "720")
+	// MakeMasterFile("master_file")
+
 }
