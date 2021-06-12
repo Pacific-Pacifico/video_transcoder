@@ -19,5 +19,6 @@ func ArgsSplitter(str string) (ArgsStringsList []string) {
 }
 
 // func main() {
-// 	fmt.Println(ArgsSplitter("ffprobe -v quiet -print_format json -show_format -show_streams \"lolwut.mp4\" > \"lolwut.mp4.json\""))
+// 	fmt.Println(ArgsSplitter("ffmpeg -i ./samples/sample.mp4 -vf scale=480:360 ./samples/output2.mp4"))
+// 	// fmt.Println(ArgsSplitter("ffprobe -v quiet -print_format json -show_format -show_streams \"lolwut.mp4\" > \"lolwut.mp4.json\""))
 // }
