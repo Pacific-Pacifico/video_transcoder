@@ -70,3 +70,47 @@ cmd := exec.Command("ffmpeg", "-y", "-i", "./temp/"+fileName,
 		"./temp/sample/hls/v%v/prog_index.m3u8",
 	)
 
+
+
+
+
+
+
+
+
+ffmpeg -i MASTER.mp4 -c:v h264 -crf 22 -tune film
+-profile:v main -level:v 4.0 -maxrate 5000k
+-bufsize 10000k -r 25 -keyint_min 25 -g 50
+-sc_threshold 0 -c:a aac -ar 44100 -b:a 128k -ac
+2 -pix_fmt yuv420p -movflags +faststart 1080.mp4
+\
+-s 1280x720 -c:v h264 -crf 24 -tune film
+-profile:v main -level:v 4.0 -maxrate 2500k
+-bufsize 5000k -r 25 -keyint_min 25 -g 50
+-sc_threshold 0 -c:a aac -ar 44100 -b:a 128k -ac
+2 -pix_fmt yuv420p -movflags +faststart 720.mp4 \
+-s 854x480 -c:v h264 -crf 30 -tune film
+-profile:v main -level:v 4.0 -maxrate 1250k
+-bufsize 2500k -r 25 -keyint_min 25 -g 50
+-sc_threshold 0 -c:a aac -ar 44100 -b:a 96k -ac 2
+-pix_fmt yuv420p -movflags +faststart 480.mp4 \
+-s 640x360 -c:v h264 -crf 33 -tune film
+-profile:v main -level:v 4.0 -maxrate 900k
+-bufsize 1800k -r 25 -keyint_min 25 -g 50
+-sc_threshold 0 -c:a aac -ar 44100 -b:a 96k -ac 2
+-pix_fmt yuv420p -movflags +faststart 360.mp4 \
+-s 320x240 -c:v h264 -crf 36 -tune film
+-profile:v main -level:v 4.0 -maxrate 625k
+-bufsize 1250k -r 25 -keyint_min 25 -g 50
+-sc_threshold 0 -c:a aac -ar 22050 -b:a 64k -ac 1
+-pix_fmt yuv420p -movflags +faststart 240.mp4
+
+
+
+
+
+ffmpeg -y -i ./hls.mkv \
+  -vf scale=w=640:h=360:force_original_aspect_ratio=decrease -c:a aac -ar 48000 -c:v h264 -profile:v main -crf 20 -sc_threshold 0 -g 48 -keyint_min 48 -hls_time 4 -hls_playlist_type vod  -b:v 800k -maxrate 856k -bufsize 1200k -b:a 96k -hls_segment_filename ./hls/360p_%03d.ts ./hls/360p.m3u8 \
+  -vf scale=w=842:h=480:force_original_aspect_ratio=decrease -c:a aac -ar 48000 -c:v h264 -profile:v main -crf 20 -sc_threshold 0 -g 48 -keyint_min 48 -hls_time 4 -hls_playlist_type vod -b:v 1400k -maxrate 1498k -bufsize 2100k -b:a 128k -hls_segment_filename ./hls/480p_%03d.ts ./hls/480p.m3u8 \
+  -vf scale=w=1280:h=720:force_original_aspect_ratio=decrease -c:a aac -ar 48000 -c:v h264 -profile:v main -crf 20 -sc_threshold 0 -g 48 -keyint_min 48 -hls_time 4 -hls_playlist_type vod -b:v 2800k -maxrate 2996k -bufsize 4200k -b:a 128k -hls_segment_filename ./hls/720p_%03d.ts ./hls/720p.m3u8 \
+  -vf scale=w=1920:h=1080:force_original_aspect_ratio=decrease -c:a aac -ar 48000 -c:v h264 -profile:v main -crf 20 -sc_threshold 0 -g 48 -keyint_min 48 -hls_time 4 -hls_playlist_type vod -b:v 5000k -maxrate 5350k -bufsize 7500k -b:a 192k -hls_segment_filename ./hls/1080p_%03d.ts ./hls/1080p.m3u8

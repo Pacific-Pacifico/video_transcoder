@@ -70,6 +70,8 @@ func main() {
 	// Transcode("sample.mp4", "854", "480")
 	// Transcode("sample.mp4", "1280", "720")
 	// MakeMasterFile("master_file")
-	TranscodeAIO("pass.mkv")
+
+	// TranscodeAIO("pass.mkv")
+	MakeMasterFile("master_file")
 
 }
