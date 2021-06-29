@@ -6,6 +6,7 @@ import (
 	"os"
 	"os/exec"
 	"runtime"
+	"time"
 )
 
 func GetMediaInfo(res string, fileName string) {
@@ -63,6 +64,7 @@ func GetMediaInfo(res string, fileName string) {
 }
 
 func main() {
+	start := time.Now()
 	// fmt.Println("Hello Wsl")
 	//GetMediaInfo("480", "sample.mkv")
 	MakeDir("sample")
@@ -71,7 +73,8 @@ func main() {
 	// Transcode("sample.mp4", "1280", "720")
 	// MakeMasterFile("master_file")
 
-	// TranscodeAIO("pass.mkv")
+	TranscodeAIO("sample.mp4")
 	MakeMasterFile("master_file")
+	fmt.Println(time.Since(start))
 
 }
