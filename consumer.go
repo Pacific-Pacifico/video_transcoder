@@ -28,14 +28,13 @@ func consume() {
 		for d := range msgs {
 			fmt.Printf("Recieved msg:%s\n", d.Body)
 			start := time.Now()
-			MakeDir("sample")
-			TranscodeAIO("sample.mp4")
+			TranscodeAIO(string(d.Body))
 			fmt.Println("Processing complete! Took ", time.Since(start))
 			d.Ack(false)
+			fmt.Println("~~waiting for task~~")
 		}
 	}()
 
-	fmt.Println("Successfully connected to Rabbitmq instance")
-	fmt.Println("~~waiting for msg~~")
+	fmt.Println("~~waiting for task~~")
 	<-forever
 }
